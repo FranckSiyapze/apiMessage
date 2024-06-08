@@ -27,7 +27,7 @@ router.get('/test', function (req, res) {
     });
 });
 
-router.post('/sendWhatMessage',nocache, function (req, res) {
+router.post('/sendWhatMessageToOperator',nocache, function (req, res) {
     const { body } = req.body;
     if (!body) {
         return res.status(400).json({status: 400, message: 'Missing required parameters' });
@@ -42,8 +42,24 @@ router.post('/sendWhatMessage',nocache, function (req, res) {
         status: message.status,
         message: 'Send'
     })
-);
-      
+);   
+});
+router.post('/sendWhatMessageBoss',nocache, function (req, res) {
+    const { body } = req.body;
+    if (!body) {
+        return res.status(400).json({status: 400, message: 'Missing required parameters' });
+    }
+    client.messages
+      .create({
+         from: 'whatsapp:+14155238886',
+         body: body,
+         to: 'whatsapp:+13435581326'
+       })
+      .then(message => res.json({
+        status: message.status,
+        message: 'Send'
+    })
+);   
 });
 /* router.post('/generateToken',nocache, function (req, res) {
     ///console.log(req.body);
