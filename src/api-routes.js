@@ -30,7 +30,7 @@ router.get('/test', function (req, res) {
 router.post('/sendWhatMessageToOperator',nocache, function (req, res) {
     const { body } = req.body;
     if (!body) {
-        return res.status(400).json({status: 400, message: 'Missing required parameters' });
+        return res.status(400).json({status: 400, message: 'Missing required parameters',statusCode:400 });
     }
     client.messages
       .create({
@@ -40,14 +40,15 @@ router.post('/sendWhatMessageToOperator',nocache, function (req, res) {
        })
       .then(message => res.json({
         status: message.status,
-        message: 'Send'
+        message: 'Send',
+        statusCode:200
     })
 );   
 });
 router.post('/sendWhatMessageBoss',nocache, function (req, res) {
     const { body } = req.body;
     if (!body) {
-        return res.status(400).json({status: 400, message: 'Missing required parameters' });
+        return res.status(400).json({status: 400, message: 'Missing required parameters',statusCode:400 });
     }
     client.messages
       .create({
@@ -57,7 +58,8 @@ router.post('/sendWhatMessageBoss',nocache, function (req, res) {
        })
       .then(message => res.json({
         status: message.status,
-        message: 'Send'
+        message: 'Send',
+        statusCode:200
     })
 );   
 });
