@@ -1,6 +1,7 @@
 // Import express
 let express = require('express');
 let dotenv = require('dotenv');
+let cors = require('cors');
 // Load environment variables from .env file in development
 if (process.env.NODE_ENV !== 'production') {
      dotenv.config();
@@ -8,6 +9,7 @@ if (process.env.NODE_ENV !== 'production') {
 // Initialize the app
 let app = express();
 app.use(express.json());
+app.use(cors());
 // Import routes
 let apiRoutes = require("./api-routes");
 // Use Api routes in the App
