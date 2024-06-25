@@ -63,6 +63,27 @@ router.post('/sendWhatMessageBoss',nocache, function (req, res) {
     })
 );   
 });
+router.post('/sendMessage',nocache, function (req, res) {
+    const { body,phone } = req.body;
+    if (!body) {
+        return res.status(400).json({status: 400, message: 'Missing Body parameters',statusCode:400 });
+    }
+    if (!phone) {
+        return res.status(400).json({status: 400, message: 'Missing Phone parameters',statusCode:400 });
+    }
+    client.messages
+      .create({
+         from: '+14706134736',
+         body: body,
+         to: phone
+       })
+      .then(message => res.json({
+        status: message.status,
+        message: 'Send',
+        statusCode:200
+    })
+);   
+});
 /* router.post('/generateToken',nocache, function (req, res) {
     ///console.log(req.body);
     res.header('Acess-Control-Allow-Origin','*');
